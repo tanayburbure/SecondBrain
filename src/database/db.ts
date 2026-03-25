@@ -1,5 +1,12 @@
 import mongoose, {Schema} from "mongoose" ;
-mongoose.connect("mongodb://localhost:27017/secondbrain")
+
+let connected = false;
+
+export const connectDB = async () => {
+    if (connected) return;
+    await mongoose.connect(process.env.DATABASE_URL!);
+    connected = true;
+}
 
 const UserSchema = new Schema({
     username : {type : String , unique: true } ,
