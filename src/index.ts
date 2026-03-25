@@ -3,10 +3,17 @@ dotenv.config();
 
 import express from "express" ; 
 import jwt from "jsonwebtoken" ;
-import { UserModel, connectDB } from "./database/db.js";
+import { ContentModel, UserModel, connectDB } from "./database/db.js";
+import { UserMiddleware } from "./middleware/middleware.js";
 
 const app = express() ;
 app.use(express.json())
+
+// Initialize database connection before starting server
+connectDB().catch(err => {
+    console.error("Failed to connect to database:", err);
+    process.exit(1);
+});
 
 app.post("/api/v1/signup" ,async (req , res) => {
     // add zod validation and hashing the password
@@ -50,7 +57,22 @@ app.post("/api/v1/signin" ,async (req , res) => {
     }
 })
 
-app.get("/api/v1/content" , (req, res) => {
+app.get("/api/v1/content" ,UserMiddleware , async (req, res) => {
+    const link = req.body.link ;
+    const type = req.body.link ;
+
+    await ContentModel.create({
+        link,
+        //@ts-ignore
+        type,
+        //@ts-ignore
+        userId : req.userId ,
+        tags : []
+    })
+
+    return res.json({
+        message : "Content Added"
+    })
 
 })
 
@@ -66,8 +88,8 @@ app.get("/api/v1/brain/:shareLink" , (req, res) => {
     
 })
 
-connectDB().then(() => {
-    app.listen(3000, () => {
-        console.log("Server running on port 3000");
-    })
-})
+// Start server after database is ready
+app.listen(3000, () => {
+    console.log("Server running on port 3000");
+});
+        
