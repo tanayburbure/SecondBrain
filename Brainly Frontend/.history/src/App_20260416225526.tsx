@@ -1,0 +1,20 @@
+import { Button } from "./components/Ui/Button"
+
+function App() {
+
+  return (
+    <>
+    <Button size="sm" variant="primary" text="share" onClick={function (): void {
+        throw new Error("Function not implemented.")
+      } }/>
+    <Button size="md" variant="secondary" text="Add Content" onClick={function (): void {
+        throw new Error("Function not implemented.")
+      } }/>
+      <Button size="lg" variant="primary" text="Show Content" onClick={function (): void {
+        throw new Error("Function not implemented.")
+      } }/>
+    </>
+  )
+}
+
+export default App
