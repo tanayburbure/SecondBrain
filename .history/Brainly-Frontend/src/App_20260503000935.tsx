@@ -6,10 +6,9 @@ function App() {
 
   return (
     <>
-      <Button varient="primary" startIcon={<PlusIcon size="lg"/>} endIcon={<ShareIcon size="sm"/>} size="lg" title="Large"></Button>
+      <Button startIcon={<PlusIcon size="lg"/>} endIcon={<ShareIcon size="sm"/>} size="lg" title="Large"></Button>
     </>
   )
 }
 
 export default App
- 

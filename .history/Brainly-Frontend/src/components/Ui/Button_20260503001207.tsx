@@ -4,7 +4,7 @@ interface ButtonInterface {
     title: string,
     size: "sm" | "md" | "lg",
     startIcon?: ReactElement,
-    endIcon?: ReactElement,
+    endIcon?: ReactElement
     varient : "primary" | "secondary"
 }
 
@@ -14,13 +14,8 @@ const sizeStyles = {
     "lg": "px-6 py-3"
 }
 
-const varientStyles ={
-    "primary" :"bg-purple-600 text-white",
-    "secondary" : "bg-purple-300 text-purple-600"
-}
-
 export function Button(props: ButtonInterface) {
-    return <button className={`${sizeStyles[props.size]} ${varientStyles[props.varient]}`}>
+    return <button className={sizeStyles[props.size] + " bg-red-400"}>
         <div className="flex items-center">
             {props.startIcon}
             {props.title}

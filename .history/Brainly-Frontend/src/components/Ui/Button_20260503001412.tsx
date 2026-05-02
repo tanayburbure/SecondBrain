@@ -4,7 +4,7 @@ interface ButtonInterface {
     title: string,
     size: "sm" | "md" | "lg",
     startIcon?: ReactElement,
-    endIcon?: ReactElement,
+    endIcon?: ReactElement
     varient : "primary" | "secondary"
 }
 
@@ -20,7 +20,7 @@ const varientStyles ={
 }
 
 export function Button(props: ButtonInterface) {
-    return <button className={`${sizeStyles[props.size]} ${varientStyles[props.varient]}`}>
+    return <button className={sizeStyles[props.size] + " bg-red-400"}>
         <div className="flex items-center">
             {props.startIcon}
             {props.title}
