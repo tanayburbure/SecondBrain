@@ -5,7 +5,6 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import { ContentModel, LinkModel, UserModel, connectDB } from "./database/db.js";
 import { UserMiddleware } from "./middleware/middleware.js";
-import { random } from "./utils/utils.js";
 
 const app = express();
 app.use(express.json());
@@ -102,23 +101,13 @@ app.delete("/api/v1/content", UserMiddleware, async (req, res) => {
   });
 });
 
-app.post("/api/v1/brain/share", UserMiddleware,async (req, res) => {
+app.post("/api/v1/brain/share", UserMiddleware, (req, res) => {
   const share = req.body.share ;
   if(share){
-    await LinkModel.create({
-      //@ts-ignore
-      userId : req.userId ,
-      hash : random(10)
-    })
-  } else {
-    await LinkModel.deleteOne({
-      //@ts-ignore
-      userId :req.userId
+    LinkModel.create({
+      userId : req.userId
     })
   }
-  res.json({
-    message : "Updated Shareable Link"
-  })
 });
 
 app.get("/api/v1/brain/:shareLink", (req, res) => {});
@@ -127,4 +116,3 @@ app.get("/api/v1/brain/:shareLink", (req, res) => {});
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
-

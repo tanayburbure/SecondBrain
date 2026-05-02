@@ -102,22 +102,22 @@ app.delete("/api/v1/content", UserMiddleware, async (req, res) => {
   });
 });
 
-app.post("/api/v1/brain/share", UserMiddleware,async (req, res) => {
+app.post("/api/v1/brain/share", UserMiddleware, (req, res) => {
   const share = req.body.share ;
   if(share){
-    await LinkModel.create({
+    LinkModel.create({
       //@ts-ignore
       userId : req.userId ,
       hash : random(10)
     })
   } else {
-    await LinkModel.deleteOne({
+    LinkModel.deleteOne({
       //@ts-ignore
       userId :req.userId
     })
   }
   res.json({
-    message : "Updated Shareable Link"
+    message : ""
   })
 });
 
