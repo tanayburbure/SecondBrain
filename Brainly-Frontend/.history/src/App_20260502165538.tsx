@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-    <Button startIcon={<PlusIcon/>} size="sm" variant="primary" text="share" onClick={function (): void {
+    <Button startIcon={<PlusIcon size={"lg"}/>} size="sm" variant="primary" text="share" onClick={function (): void {
         throw new Error("Function not implemented.")
       } }/>
     <Button size="md" variant="secondary" text="Add Content" onClick={function (): void {
