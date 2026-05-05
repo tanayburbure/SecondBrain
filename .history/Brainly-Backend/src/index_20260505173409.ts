@@ -116,11 +116,7 @@ app.post("/api/v1/brain/share", UserMiddleware,async (req, res) => {
       return
     }
     const hash = random(10)
-    await LinkModel.create({
-      //@ts-ignore
-      userId : req.userId,
-      hash:hash
-    })
+    
 
   } else {
     await LinkModel.deleteOne({

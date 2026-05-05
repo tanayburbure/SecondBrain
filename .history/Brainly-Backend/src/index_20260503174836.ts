@@ -105,30 +105,20 @@ app.delete("/api/v1/content", UserMiddleware, async (req, res) => {
 app.post("/api/v1/brain/share", UserMiddleware,async (req, res) => {
   const share = req.body.share ;
   if(share){
-    const existingLink = await LinkModel.findOne({
-      // @ts-ignore
-      userId : req.userId
-    })
-    if(existingLink){
-      res.json({
-        hash:existingLink.hash
-      })
-      return
-    }
-    const hash = random(10)
     await LinkModel.create({
       //@ts-ignore
-      userId : req.userId,
-      hash:hash
+      userId : req.userId ,
+      hash : random(10)
     })
-
   } else {
     await LinkModel.deleteOne({
       //@ts-ignore
       userId :req.userId
     })
-    return res.json({ message: "Shareable link removed" })
   }
+  res.json({
+    message : "Updated Shareable Link"
+  })
 });
 
 app.get("/api/v1/brain/:shareLink",async (req, res) => {
@@ -151,16 +141,9 @@ app.get("/api/v1/brain/:shareLink",async (req, res) => {
     userId : link.userId
   })
 
-  if (!user){
-    res.status(411).json({
-      message : "User not Found ideally this error should not be there"
-    });
-    return;
-  }
-
   res.json({
-    username : user.username ,
-    content : content
+    username : user?.username ,
+    content : 
   })
 
 });

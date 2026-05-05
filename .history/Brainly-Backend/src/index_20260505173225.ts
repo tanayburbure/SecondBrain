@@ -109,18 +109,7 @@ app.post("/api/v1/brain/share", UserMiddleware,async (req, res) => {
       // @ts-ignore
       userId : req.userId
     })
-    if(existingLink){
-      res.json({
-        hash:existingLink.hash
-      })
-      return
-    }
-    const hash = random(10)
-    await LinkModel.create({
-      //@ts-ignore
-      userId : req.userId,
-      hash:hash
-    })
+    if(existingLink)
 
   } else {
     await LinkModel.deleteOne({

@@ -105,23 +105,7 @@ app.delete("/api/v1/content", UserMiddleware, async (req, res) => {
 app.post("/api/v1/brain/share", UserMiddleware,async (req, res) => {
   const share = req.body.share ;
   if(share){
-    const existingLink = await LinkModel.findOne({
-      // @ts-ignore
-      userId : req.userId
-    })
-    if(existingLink){
-      res.json({
-        hash:existingLink.hash
-      })
-      return
-    }
-    const hash = random(10)
-    await LinkModel.create({
-      //@ts-ignore
-      userId : req.userId,
-      hash:hash
-    })
-
+    const existingLink = 
   } else {
     await LinkModel.deleteOne({
       //@ts-ignore

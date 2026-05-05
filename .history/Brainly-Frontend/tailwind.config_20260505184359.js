@@ -9,8 +9,8 @@ export default {
         colors : {
             slate : {
               100 : "#eeeeef" ,
-              200 : "#e6e9ed" ,
-              600 : "#95989c"
+              200 : "" ,
+              600 : ""
             },
             purple : {
               200 : "#d9ddee",

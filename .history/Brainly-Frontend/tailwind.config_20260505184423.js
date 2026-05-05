@@ -10,7 +10,7 @@ export default {
             slate : {
               100 : "#eeeeef" ,
               200 : "#e6e9ed" ,
-              600 : "#95989c"
+              600 : "#9596"
             },
             purple : {
               200 : "#d9ddee",

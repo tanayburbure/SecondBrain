@@ -105,23 +105,17 @@ app.delete("/api/v1/content", UserMiddleware, async (req, res) => {
 app.post("/api/v1/brain/share", UserMiddleware,async (req, res) => {
   const share = req.body.share ;
   if(share){
-    const existingLink = await LinkModel.findOne({
-      // @ts-ignore
-      userId : req.userId
-    })
-    if(existingLink){
-      res.json({
-        hash:existingLink.hash
-      })
-      return
-    }
-    const hash = random(10)
-    await LinkModel.create({
+    try{
+      const hash = random(10)
+      await LinkModel.create({
       //@ts-ignore
-      userId : req.userId,
-      hash:hash
-    })
-
+        userId : req.userId
+        hash : hash
+      })
+      return res.json({ hash })
+    } catch (e) {
+      return res.status(500).json({ message: "Failed to create link" })
+    }
   } else {
     await LinkModel.deleteOne({
       //@ts-ignore
